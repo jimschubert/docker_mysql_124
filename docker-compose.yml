@@ -1,0 +1,21 @@
+version: '2'
+services:
+  service:
+    image: "dev/finch-petstore"
+    build: .
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+    links:
+      - db
+  db:
+    image: mysql
+    volumes:
+      - ./database:/db/:ro
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: sample
+      MYSQL_USER: finch
+      MYSQL_PASSWORD: f1nch!
+      MYSQL_ROOT_PASSWORD: f1nch!
